@@ -1,0 +1,13 @@
+{
+  "name": "jogo-do-galo-online",
+  "version": "1.0.0",
+  "description": "Jogo do Galo online com salas privadas, chat e videochamada WebRTC",
+  "main": "server.js",
+  "scripts": { "start": "node server.js" },
+  "engines": { "node": ">=20" },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "express": "^4.21.2",
+    "socket.io": "^4.8.1"
+  }
+}

@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#15233d">
+  <title>Jogo do Galo Online</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <main class="shell">
+    <header class="hero">
+      <div class="eyebrow">UM JOGO A DOIS</div>
+      <h1>Jogo do Galo <span>♥</span></h1>
+      <p>Uma partida, uma conversa e um bocadinho de diversão.</p>
+    </header>
+
+    <section id="lobby" class="panel">
+      <h2>Entrar para jogar</h2>
+      <label for="playerName">O teu nome</label>
+      <input id="playerName" maxlength="24" placeholder="Como te chamam?" autocomplete="nickname">
+      <div class="lobby-grid">
+        <form id="createForm" class="subpanel">
+          <h3>Criar uma sala</h3>
+          <p>Só o administrador pode abrir novas salas.</p>
+          <label for="adminPassword">Palavra-passe de administrador</label>
+          <input id="adminPassword" type="password" placeholder="Palavra-passe" autocomplete="current-password">
+          <button class="primary" type="submit">Criar sala privada</button>
+        </form>
+        <form id="joinForm" class="subpanel">
+          <h3>Entrar numa sala</h3>
+          <p>Usa o código que recebeste por mensagem.</p>
+          <label for="roomCode">Código da sala</label>
+          <input id="roomCode" maxlength="6" placeholder="Ex.: A1B2C3" autocapitalize="characters">
+          <button class="secondary" type="submit">Entrar na sala</button>
+        </form>
+      </div>
+      <div id="lobbyError" class="error" role="alert"></div>
+      <p class="privacy-note">Partilha apenas o link ou código da sala — nunca a palavra-passe de administrador.</p>
+    </section>
+
+    <section id="game" class="hidden">
+      <div class="panel game-panel">
+        <div class="room-heading">
+          <div><div class="eyebrow">SALA PRIVADA</div><h2>Sala <span id="roomCodeLabel"></span></h2></div>
+          <button id="shareBtn" class="secondary small">Partilhar convite</button>
+        </div>
+        <div id="status" class="status">À espera do segundo jogador…</div>
+        <div id="players" class="players"></div>
+        <div id="board" class="board" aria-label="Tabuleiro do jogo do galo">
+          <button class="cell" data-index="0" aria-label="Casa 1"></button>
+          <button class="cell" data-index="1" aria-label="Casa 2"></button>
+          <button class="cell" data-index="2" aria-label="Casa 3"></button>
+          <button class="cell" data-index="3" aria-label="Casa 4"></button>
+          <button class="cell" data-index="4" aria-label="Casa 5"></button>
+          <button class="cell" data-index="5" aria-label="Casa 6"></button>
+          <button class="cell" data-index="6" aria-label="Casa 7"></button>
+          <button class="cell" data-index="7" aria-label="Casa 8"></button>
+          <button class="cell" data-index="8" aria-label="Casa 9"></button>
+        </div>
+        <button id="newGameBtn" class="primary">Novo jogo</button>
+        <button id="leaveBtn" class="text-button">Sair da sala</button>
+      </div>
+
+      <div class="side-grid">
+        <section class="panel chat-panel">
+          <h2>💬 Conversa</h2>
+          <div id="chatMessages" class="chat-messages" aria-live="polite"></div>
+          <form id="chatForm" class="chat-form">
+            <input id="chatInput" maxlength="500" placeholder="Escreve uma mensagem…" autocomplete="off">
+            <button class="primary" type="submit" aria-label="Enviar mensagem">Enviar</button>
+          </form>
+        </section>
+        <section class="panel video-panel">
+          <h2>📹 Câmara e microfone</h2>
+          <p class="muted">Ativa a chamada nos dois dispositivos. O navegador pedirá autorização para usar a câmara e o microfone.</p>
+          <div class="video-grid">
+            <div><video id="localVideo" autoplay playsinline muted></video><span>Tu</span></div>
+            <div><video id="remoteVideo" autoplay playsinline></video><span>Outra pessoa</span></div>
+          </div>
+          <div class="video-actions">
+            <button id="startCallBtn" class="secondary">Ativar câmara e microfone</button>
+            <button id="stopCallBtn" class="text-button">Desligar chamada</button>
+          </div>
+          <div id="callStatus" class="muted small-text" aria-live="polite">A chamada ainda não está ativa.</div>
+        </section>
+      </div>
+    </section>
+    <footer>Feito para jogar juntos, mesmo à distância. ❤️</footer>
+  </main>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/client.js"></script>
+</body>
+</html>
